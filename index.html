@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULTIMATE FLICKER GUESS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="confetti-bg">
+    <!-- Sound toggle -->
+    <div class="sound-toggle" id="soundToggle">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+        </svg>
+    </div>
+
+    <!-- Game mode selector -->
+    <div class="mode-selector">
+        <button class="mode-btn active" data-mode="standard">Standard</button>
+        <button class="mode-btn" data-mode="timed">Timed</button>
+        <button class="mode-btn" data-mode="zen">Zen</button>
+    </div>
+
+    <!-- Main game container -->
+    <div id="game" class="game-3d">
+        <h1 class="rainbow-text">GUESS THE FLICKER!</h1>
+        
+        <div class="stats-container">
+            <div class="counter">
+                <div class="counter-label">TIME LEFT</div>
+                <div class="counter-value"><span id="timer">60</span>s</div>
+            </div>
+            <div class="counter">
+                <div class="counter-label">SCORE</div>
+                <div class="counter-value"><span id="score">0</span></div>
+            </div>
+            <div class="counter">
+                <div class="counter-label">STREAK</div>
+                <div class="counter-value"><span id="streak">0</span></div>
+            </div>
+        </div>
+        
+        <div class="difficulty-selector">
+            <div class="difficulty-button active" data-difficulty="easy">Easy (4x4)</div>
+            <div class="difficulty-button" data-difficulty="medium">Medium (5x5)</div>
+            <div class="difficulty-button" data-difficulty="hard">Hard (6x6)</div>
+            <div class="difficulty-button" data-difficulty="impossible">Impossible (7x7)</div>
+        </div>
+        
+        <div id="grid" class="grid pulse"></div>
+        
+        <div id="result" class="result-message"></div>
+        
+        <div class="game-stats">
+            <div class="stat-box">
+                <span class="stat-label">Correct:</span>
+                <span class="stat-value" id="correctCount">0</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Wrong:</span>
+                <span class="stat-value" id="wrongCount">0</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Accuracy:</span>
+                <span class="stat-value" id="accuracy">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- End screen -->
+    <div id="endScreen" class="end-screen" style="display: none;">
+        <div class="result-container">
+            <h2 class="end-title neon-text">GAME OVER!</h2>
+            <div class="score-summary">
+                <div class="final-score-display">
+                    <div class="score-label">FINAL SCORE</div>
+                    <div class="score-value" id="finalScore">0</div>
+                </div>
+                <div class="stats-summary">
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-label">Highest Streak:</span>
+                        <span class="stat-value" id="highestStreak">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">✓</span>
+                        <span class="stat-label">Total Correct:</span>
+                        <span class="stat-value" id="totalCorrect">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">✗</span>
+                        <span class="stat-label">Total Wrong:</span>
+                        <span class="stat-value" id="totalWrong">0</span>
+                    </div>
+                </div>
+            </div>
+            <p class="challenge-text">Enter your details below.To check your rank</p>
+            <form id="scoreForm" class="score-form">
+                <div class="form-group">
+                    <label for="playerName">Your Epic Name:</label>
+                    <input type="text" id="playerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="playerEmail">Your Email:</label>
+                    <input type="email" id="playerEmail" required>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <span class="btn-effect"></span>
+                    <span class="btn-text">SUBMIT SCORE</span>
+                </button>
+            </form>
+            <button id="viewRankings" class="rankings-btn" style="display: none;">
+                <span class="btn-effect"></span>
+                <span class="btn-text">VIEW GLOBAL RANKINGS</span>
+            </button>
+            <div id="rankings" class="rankings-container" style="display: none;">
+                <h3 class="rainbow-text">ULTIMATE LEADERBOARD</h3>
+                <table id="rankingsTable">
+                    <thead>
+                        <tr>
+                            <th>RANK</th>
+                            <th>NAME</th>
+                            <th>SCORE</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rankingsBody"></tbody>
+                </table>
+                <div class="action-buttons">
+                    <button id="playAgain" class="play-again-btn">
+                        <span class="btn-effect"></span>
+                        <span class="btn-text">PLAY AGAIN</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
