@@ -47,11 +47,12 @@ function createPlayButton() {
     playButton.id = "playButton";
     playButton.className = "game-btn";
     playButton.innerHTML = '<span class="btn-effect"></span><span class="btn-text">PLAY GAME</span>';
-    playButton.style.fontSize = "24px";
-    playButton.style.padding = "15px 30px";
-    playButton.style.marginTop = "30px";
+    playButton.style.padding = "";
+    playButton.style.fontSize = "";
+    playButton.style.marginTop = "2vh";
     playButton.addEventListener("click", () => {
         grid.style.display = "grid";
+        console.log("Grid display set to grid"); // Debug log
         playButton.remove();
         startGame();
     });
@@ -110,13 +111,13 @@ function createGrid() {
         grid.appendChild(tile);
         tiles.push(tile);
     }
+    console.log("Grid created with", gridSize, "tiles"); // Debug log
 }
 
 // Next Round
 function nextRound() {
     resultDisplay.textContent = "";
     playerGuess = [];
-    // Reset all tiles' visual state
     tiles.forEach(tile => {
         tile.classList.remove('active', 'selected');
     });
@@ -163,7 +164,7 @@ function checkGuess() {
     gameActive = false;
     const correct = pattern.every(index => playerGuess.includes(index));
     if (correct) {
-        score += 30; // Adjusted to match the image (score increases by 30 per round)
+        score += 30;
         streak++;
         correctCount++;
         if (streak > highestStreak) highestStreak = streak;
@@ -204,7 +205,7 @@ function endGame() {
     totalCorrectDisplay.textContent = correctCount;
     totalWrongDisplay.textContent = wrongCount;
     gameScreen.style.display = "none";
-    endScreen.style.display = "block";
+    endScreen.style.display = "flex";
 }
 
 // Save Score to Google Sheets
